@@ -7,8 +7,7 @@ router.get('/', function(req, res, next) {
   const param = req;
   db.collection('users').where('uuid', '=', param.uuid).get()
   .then(docs => {
-    docs.forEach(user => res.send({user: user}));
-
+    docs.forEach(user => res.send({msg: 'Success', user: user}));
   })
 });
 
