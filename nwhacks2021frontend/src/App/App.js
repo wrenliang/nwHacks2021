@@ -36,11 +36,12 @@ function App() {
   return (
     <Router>
       <div>
-        <Switch>
+        {/* <Switch>
           <Route path="/set" render={(props) => <SetPage {...props} data={mockSet} />}/>
           <Route path="/home" render={(props) => <HomePage {...props} />}/>
           <Route path="/" render={(props) => <LandingPage {...props} />}/>
-        </Switch>
+        </Switch> */}
+        <LandingPage/>
       </div>
     </Router>
   );
