@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import "./LandingPage.css"
 import Landing_Page_Graphic from "./Landing_Page_Graphic.svg"
+import {withRouter} from 'react-router-dom';
 var firebase = require("firebase/app").default;
 
 require('firebase/auth');
@@ -24,7 +25,7 @@ firebase.initializeApp(firebaseConfig);
 
 var globalUsername;
 
-class PopUp extends React.Component{
+class PopUpH extends React.Component{
     constructor(props){
         super(props);
 
@@ -94,19 +95,23 @@ class PopUp extends React.Component{
 	                    dividerChar: dividerProperty
                     }
                 }
-                fetch("http://localhost:8000/users", {
-                    method: 'POST',
-                    body: JSON.stringify(postBody), // string or object
-                    headers: {
-                    'Content-Type': 'application/json'
-                    }
-                });
+                // fetch("http://localhost:8000/users", {
+                //     method: 'POST',
+                //     body: JSON.stringify(postBody), // string or object
+                //     headers: {
+                //     'Content-Type': 'application/json'
+                //     }
+                // });
                 // Signed in 
                 // ...
-                this.props.routerProps.push({
-                    pathname: '/home',
-                    firebaseUser: user
-                });
+
+                // this.props.switchPage(user);
+                // // console.log(this.props.history);
+                // this.props.history.push({
+                //     pathname: '/home',
+                // });
+                
+                this.props.history.push('/home');
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -114,6 +119,7 @@ class PopUp extends React.Component{
                 console.log("error code: " + errorCode);
                 console.log("error message:" + errorMessage);
             });
+
     }
     
     // adding syntax pop up to the home page
@@ -177,56 +183,7 @@ class PopUp extends React.Component{
     }
 }
 
-class syntaxPopUp extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            show: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-
-    closeSyntaxPopUp(){
-        this.setState({
-            showSyntaxPopUp: false
-        });
-    }
-
-    showSyntaxPopUp(){
-        this.setState({
-            showSyntaxPopUp: true
-        });
-    }
-
-    // render(){
-    //     return(
-    //         <Modal
-    //             show={show}
-    //             onHide={handleClose}
-    //             backdrop="static"
-    //             keyboard={false}
-    //         >
-    //             <Modal.Header closeButton>
-    //                 <Modal.Title>Modal title</Modal.Title>
-    //             </Modal.Header>
-    //             <Modal.Body>
-    //                 I will not close if you click outside me. Don't even try to press
-    //                 escape key.
-    //             </Modal.Body>
-    //             <Modal.Footer>
-    //                 <Button variant="secondary" onClick={handleClose}>
-    //                 Close
-    //                 </Button>
-    //                 <Button variant="primary">Understood</Button>
-    //             </Modal.Footer>
-    //         </Modal>
-    //     );
-    // }
-
-}
-
+const PopUp = withRouter(PopUpH);
 function Example() {
     const [show, setShow] = useState(false);
   
@@ -274,6 +231,15 @@ class LandingPage extends React.Component{
         this.signUp = this.signUp.bind();
         this.signOut = this.signOut.bind();
         this.togglePopup= this.togglePopup.bind(this);
+        this.switchPage = this.switchPage.bind(this);
+    }
+
+    switchPage(user) {
+        console.log("CMON");
+        this.history.props.push({
+            pathname: '/home',
+            state: user
+        })
     }
 
     togglePopup() {
@@ -324,6 +290,14 @@ class LandingPage extends React.Component{
         //   });
     }
 
+    pushToHomePage = (user) => {
+        console.log('calling this');
+        this.props.history.push({
+            pathname: '/home',
+            state: user
+        });
+    }
+
     render(){
         return(
             <div class="pageContainer">
@@ -346,7 +320,8 @@ class LandingPage extends React.Component{
                 {this.state.showPopup ? 
                     <PopUp
                         closePopup={this.togglePopup.bind(this)}
-                        routerProps={this.props.history}
+                        pushHandler={this.pushToHomePage}
+                        historyProp={this.switchPage}
                     />
                     : null
                 }
@@ -362,30 +337,31 @@ class LandingPage extends React.Component{
     }
 }
 
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log("in onauthstatechange");
-        var uid = user.uid;
-        console.log(uid);
-        // var postBody = {
-        //     uuid: uid,
-        //     username: globalUsername,
-        //     syntax: {}
-        // }
-        // fetch("http://localhost:8000/users", {
-        //     method: 'POST',
-        //     body: JSON.stringify(postBody), // string or object
-        //     headers: {
-        //     'Content-Type': 'application/json'
-        //     }
-        // });
-        // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (user) {
+//         // User is signed in, see docs for a list of available properties
+//         // https://firebase.google.com/docs/reference/js/firebase.User
+//         console.log("in onauthstatechange");
+//         var uid = user.uid;
+//         console.log(uid);
+//         // var postBody = {
+//         //     uuid: uid,
+//         //     username: globalUsername,
+//         //     syntax: {}
+//         // }
+//         // fetch("http://localhost:8000/users", {
+//         //     method: 'POST',
+//         //     body: JSON.stringify(postBody), // string or object
+//         //     headers: {
+//         //     'Content-Type': 'application/json'
+//         //     }
+//         // });
+//         // ...
+//     } else {
+//       // User is signed out
+//       // ...
+//     }
+    
+// })
 
 export default LandingPage;
