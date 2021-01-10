@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
  
  router.post('/', function(req, res, next) {
   //INSERT PARSING LOGIC HERE
-  
+
   const param = req.body;
 
   db.collection('sets').doc()
@@ -27,6 +27,17 @@ router.get('/', function(req, res, next) {
   })
  })
 
+ router.put('/', function(req, res, next) {
+  //INSERT PARSING LOGIC HERE
+
+  const param = req.body;
+
+  db.collection('sets').where('creatorId', '=', param.creatorId).where('title', '=', param.title).get()
+  .then(docs => {
+    docs.forEach(doc => doc.ref.update({param}));
+    res.send({msg: 'Success'});
+  })
+})
 
  
  router.delete('/', function(req, res, next) {
