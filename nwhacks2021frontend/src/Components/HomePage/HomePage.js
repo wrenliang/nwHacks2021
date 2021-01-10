@@ -20,11 +20,12 @@ class HomePage extends React.Component {
 
         this.state = {
             tabSelected: 0,
-            showModal: false,
-            firebaseUser: this.props.location.state,
+            showModal: true,
+            firebaseUser: this.props.user.user,
             sets: [],
-            creatorId: "wrennyboy123"
+            creatorId: this.props.user.user.uid
         }
+        console.log(this.props.user);
     }
 
     componentDidMount() {
