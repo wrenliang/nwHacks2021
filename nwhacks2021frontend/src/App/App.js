@@ -1,7 +1,9 @@
+import {useState, useEffect} from 'react';
+
 // Component Dependencies
 import SetPage from '../Components/SetPage/setPage';
+import HomePage from '../Components/HomePage/HomePage';
 
-import {useState, useEffect} from 'react';
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -40,7 +42,7 @@ function App() {
     <Router>
       <div>
           <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
-
+          <Route path="/home" render={(props) => <HomePage {...props}/>}/>
       </div>
     </Router>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Nav, Navbar } from 'react-bootstrap';
+import { Button, Navbar, Modal, Form } from 'react-bootstrap';
 
 // Component Dependencies
 import NoteSetTile from '../NoteSetTile/NoteSetTile';
+import FileDropper from '../FileDropper/FileDropper';
 
 // CSS
 import './HomePage.css';
@@ -13,6 +14,7 @@ class HomePage extends React.Component {
 
         this.state = {
             tabSelected: 0,
+            showModal: true,
             noteSets: [
                 {
                     title: "Title1",
@@ -62,6 +64,34 @@ class HomePage extends React.Component {
         }
     }
 
+    toggleModal = () => {
+        this.setState({
+            showModal: !this.state.showModal
+        });
+
+        this.forceUpdate();
+    }
+
+    titleDidChange = (event) => {
+        this.setState({
+            newSetTitle: event.target.value
+        });
+    }
+
+    handleNewFetchedData = (res) => {
+        console.log(res);
+        console.log(`Array ${res.data}`);
+        this.setState({
+            newSetCards: res.data
+        });
+    }
+
+    buildAPIRequest = () => {
+        console.log(this.state);
+    }
+
+
+
     render() {
         return (
             <div className="HomePage">
@@ -69,9 +99,8 @@ class HomePage extends React.Component {
                     <Navbar.Brand> <strong>Wireframe</strong></Navbar.Brand>
                 </Navbar>
                 <div className="Sidebar">
-                    
                     <div className="SidebarOptions">
-                        <Button > + Upload Notes </Button>
+                        <Button onClick={this.toggleModal}> + Upload Notes </Button>
                         <h5>Home</h5>
                         <h5>Folders</h5>
                         <h5>Shared with me</h5>
@@ -82,6 +111,29 @@ class HomePage extends React.Component {
                         {this.listOfSets()}
                     </div>
                 </div>
+
+                <Modal show={this.state.showModal} onHide={this.toggleModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Upload Notes</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        
+                        <FileDropper handleNewFetchedData={this.handleNewFetchedData}></FileDropper>
+                        <Form>
+                            <br />
+                            <Form.Control type="email" placeholder="Card Set name" onChange={this.titleDidChange}/>
+                        </Form>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.toggleModal}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={this.buildAPIRequest}>
+                            Create new cards
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

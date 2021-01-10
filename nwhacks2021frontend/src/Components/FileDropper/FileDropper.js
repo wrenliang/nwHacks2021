@@ -18,11 +18,19 @@ class FileDropper extends React.Component {
         this.uploadButtonClicked = this.uploadButtonClicked.bind(this);
     }
 
-    fileDidChangeHandler(event) {
+    async fileDidChangeHandler(event) {
         this.setState({
             selectedFile: event.target.files[0]
         });
         console.log(event.target.files[0]);
+
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        const res = await axios.post(`http://localhost:8000/upload`, data, {});
+        // console.log(res);
+
+        this.props.handleNewFetchedData(res);
     }
 
     async uploadButtonClicked() {
@@ -39,10 +47,10 @@ class FileDropper extends React.Component {
         return (
             <div className="FileDropper">
                 <input type="file" name="file" onChange={this.fileDidChangeHandler} className="FileInput"/>
-                <div className="CreateButtons">
+                {/* <div className="CreateButtons">
                     <Button onClick={() => this.uploadButtonClicked()} variant="primary"> Create New Notes </Button>
                     <Button variant="light"> Add to Existing </Button>
-                </div>
+                </div> */}
                 
             </div>
         );
