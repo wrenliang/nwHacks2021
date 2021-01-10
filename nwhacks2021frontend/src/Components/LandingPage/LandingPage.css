@@ -175,3 +175,13 @@ body {
 .verticalFlexBox{
     display: flex;
 }
+
+.smallFont{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-small;
+    margin: 0px;
+}
+
+.smallFontGroup{
+    margin-top: 20px;
+}

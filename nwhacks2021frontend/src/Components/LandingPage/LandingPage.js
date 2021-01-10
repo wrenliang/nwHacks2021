@@ -172,6 +172,13 @@ class PopUpH extends React.Component{
                                 <option value="/">/</option>
                             </select>
                         </form>
+                        <div className="smallFontGroup">
+                            <p className="smallFont"><b>Friendly Reminder</b></p>
+                            <p className="smallFont">Don’t skip lines between term and definition</p>
+                            <p className="smallFont">Don’t use term property on other contents</p>
+                            <p className="smallFont">Don’t use multiple properties on one term</p>
+                        </div>
+                        
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.handleSubmit}>Create Syntax</Button>
