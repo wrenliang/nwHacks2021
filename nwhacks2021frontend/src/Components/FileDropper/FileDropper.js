@@ -27,7 +27,7 @@ class FileDropper extends React.Component {
         const data = new FormData();
         data.append('file', event.target.files[0]);
 
-        const res = await axios.post(`http://localhost:8000/upload`, data, {});
+        const res = await axios.post(`http://localhost:8000/upload?termProperty=${'bold'}&dividerChar=${':'}`, data, {});
         // console.log(res);
 
         this.props.handleNewFetchedData(res);
@@ -38,7 +38,7 @@ class FileDropper extends React.Component {
             const data = new FormData();
             data.append('file', this.state.selectedFile);
 
-            const res = await axios.post(`http://localhost:8000/upload`, data, {});
+            const res = await axios.post(`http://localhost:8000/upload?termProperty=${'bold'}&dividerChar=${':'}`, data, {});
             console.log(res);
         }
     }

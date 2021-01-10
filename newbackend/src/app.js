@@ -45,9 +45,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         return next(error)
     }
 
-    console.log(file);
+    console.log(req.query);
+
+    const termProperty = req.query.termProperty;
+    const dividerChar = req.query.dividerChar;
     
-    const array = await parser(file.path, 'bold');
+    const array = await parser(file.path, termProperty, dividerChar);
 
     console.log(array);
 
