@@ -16,13 +16,14 @@ class HomePage extends React.Component {
         this.state = {
             tabSelected: 0,
             showModal: true,
-            creatorId: `1234`,
+            firebaseUser: this.props.firebaseUser,
             sets: []
         }
     }
 
     componentDidMount() {
         this.getUserSets();
+        console.log(this.state);
     }
 
     clickedOnASet = (index) => {

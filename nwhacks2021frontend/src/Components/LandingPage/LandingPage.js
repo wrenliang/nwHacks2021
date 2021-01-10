@@ -9,19 +9,20 @@ require('firebase/auth');
 require('firebase/database');
 require('firebase/storage');
 
-var firebaseConfig = {
-    apiKey: "<place your own here>",
-    authDomain: "<place your own here>",
-    projectId: "<place your own here>",
-    storageBucket: "<place your own here>",
-    messagingSenderId: "<place your own here>",
-    appId: "<place your own here>",
-    measurementId: "<place your own here>"
+const firebaseConfig = {
+    apiKey: "AIzaSyDiMhw8ocS_YU4t0A95Nw0o8FCc_ThG9pU",
+    authDomain: "nwhacks2021-f6e09.firebaseapp.com",
+    databaseURL: "https://nwhacks2021-f6e09-default-rtdb.firebaseio.com",
+    projectId: "nwhacks2021-f6e09",
+    storageBucket: "nwhacks2021-f6e09.appspot.com",
+    messagingSenderId: "328011177868",
+    appId: "1:328011177868:web:463da6aaa9eaf03280c0a9",
+    measurementId: "G-PJSEW8HWLK"
 };
 
 firebase.initializeApp(firebaseConfig);
 
-var username;
+var globalUsername;
 
 class PopUp extends React.Component{
     constructor(props){
@@ -47,12 +48,12 @@ class PopUp extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-        const {username, email, password} = this.state;
+        var {username, email, password} = this.state;
         console.log(username);
         console.log(email);
         console.log(password);
 
-        username = this.username;
+        globalUsername = username;
         
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
@@ -60,6 +61,10 @@ class PopUp extends React.Component{
                 
                 // Signed in 
                 // ...
+                this.props.routerProps.push({
+                    pathname: '/home',
+                    firebaseUser: user
+                });
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -207,6 +212,7 @@ class LandingPage extends React.Component{
                 {this.state.showPopup ? 
                     <PopUp
                         closePopup={this.togglePopup.bind(this)}
+                        routerProps={this.props.history}
                     />
                     : null
                 }
@@ -231,12 +237,12 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log(uid);
         var postBody = {
             uuid: uid,
-            username: username,
+            username: globalUsername,
             syntax: {}
         }
-        fetch("http://localhost:3000/", {
+        fetch("http://localhost:8000/users", {
             method: 'POST',
-            body: postBody, // string or object
+            body: JSON.stringify(postBody), // string or object
             headers: {
             'Content-Type': 'application/json'
             }

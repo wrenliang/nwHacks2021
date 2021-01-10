@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 // Component Dependencies
 import SetPage from '../Components/SetPage/setPage';
 import HomePage from '../Components/HomePage/HomePage';
-// import LandingPage from '../Components/LandingPage/LandingPage'
+import LandingPage from '../Components/LandingPage/LandingPage'
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +13,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import LandingPage from '../Components/LandingPage/LandingPage';
 
 let mockSet = {
   creatorId: "Matthew",
@@ -43,10 +42,12 @@ function App() {
   return (
     <Router>
       <div>
-          {/* <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
-          <Route path="/home" render={(props) => <HomePage {...props}/>}/> */}
-          {/* <Route path="/" render={(props) => <LandingPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/> */}
-          <LandingPage/>
+          <Route path="/" render={(props) => <LandingPage {...props}/>}/>
+          <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
+          <Route path="/home" render={(props) => <HomePage {...props}/>}/>
+          
+
+          {/* <LandingPage/> */}
       </div>
     </Router>
   );
