@@ -87,9 +87,14 @@ class HomePage extends React.Component {
     }
 
     buildAPIRequest = () => {
-        console.log(this.state);
-    }
+        const requestBody = {
+            creatorId: this.state.creatorId,
+            title: this.state.newSetTitle,
+            cards: this.state.newSetCards
+        }
 
+        console.log(requestBody);
+    }
 
 
     render() {
