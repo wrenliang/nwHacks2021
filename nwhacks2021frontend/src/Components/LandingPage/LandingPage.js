@@ -58,7 +58,22 @@ class PopUp extends React.Component{
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 console.log("sign up success");
-                
+                console.log("uid:" + user.user.uid);
+                var postBody = {
+                    uuid: user.user.uid,
+                    username: username,
+                    syntax: {
+                        termProperty: "bold",
+	                    dividerChar: ":"
+                    }
+                }
+                fetch("http://localhost:8000/users", {
+                    method: 'POST',
+                    body: JSON.stringify(postBody), // string or object
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                });
                 // Signed in 
                 // ...
                 this.props.routerProps.push({
@@ -168,26 +183,26 @@ class LandingPage extends React.Component{
 
     signUp(){
         console.log("pressed sign up");
-        firebase.auth().createUserWithEmailAndPassword("alan.shuyaowen@gmail.com", "password")
-            .then((user) => {
-                console.log("sign up success");
+        // firebase.auth().createUserWithEmailAndPassword("alan.shuyaowen@gmail.com", "password")
+        //     .then((user) => {
+        //         console.log("sign up success");
                 
-                // Signed in 
-                // ...
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-            });
+        //         // Signed in 
+        //         // ...
+        //     })
+        //     .catch((error) => {
+        //         var errorCode = error.code;
+        //         var errorMessage = error.message;
+        //     });
     }
 
     signOut(){
         console.log("pressed sign out");
-        firebase.auth().signOut().then(() => {
-            // Sign-out successful.
-          }).catch((error) => {
-            // An error happened.
-          });
+        // firebase.auth().signOut().then(() => {
+        //     // Sign-out successful.
+        //   }).catch((error) => {
+        //     // An error happened.
+        //   });
     }
 
     render(){
@@ -235,18 +250,18 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log("in onauthstatechange");
         var uid = user.uid;
         console.log(uid);
-        var postBody = {
-            uuid: uid,
-            username: globalUsername,
-            syntax: {}
-        }
-        fetch("http://localhost:8000/users", {
-            method: 'POST',
-            body: JSON.stringify(postBody), // string or object
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        });
+        // var postBody = {
+        //     uuid: uid,
+        //     username: globalUsername,
+        //     syntax: {}
+        // }
+        // fetch("http://localhost:8000/users", {
+        //     method: 'POST',
+        //     body: JSON.stringify(postBody), // string or object
+        //     headers: {
+        //     'Content-Type': 'application/json'
+        //     }
+        // });
         // ...
     } else {
       // User is signed out
