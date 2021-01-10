@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import "./LandingPage.css"
 import Landing_Page_Graphic from "./Landing_Page_Graphic.svg"
+import {withRouter} from 'react-router-dom';
 var firebase = require("firebase/app").default;
 
 require('firebase/auth');
@@ -24,7 +25,7 @@ firebase.initializeApp(firebaseConfig);
 
 var globalUsername;
 
-class PopUp extends React.Component{
+class PopUpH extends React.Component{
     constructor(props){
         super(props);
 
@@ -67,26 +68,29 @@ class PopUp extends React.Component{
 	                    dividerChar: ":"
                     }
                 }
-                fetch("http://localhost:8000/users", {
-                    method: 'POST',
-                    body: JSON.stringify(postBody), // string or object
-                    headers: {
-                    'Content-Type': 'application/json'
-                    }
-                });
+                // fetch("http://localhost:8000/users", {
+                //     method: 'POST',
+                //     body: JSON.stringify(postBody), // string or object
+                //     headers: {
+                //     'Content-Type': 'application/json'
+                //     }
+                // });
                 // Signed in 
                 // ...
 
-                // this.props.pushHandler(user);
-                this.props.historyProp.push({
-                    pathname: '/home',
-                    state: user
-                });
+                // this.props.switchPage(user);
+                // // console.log(this.props.history);
+                // this.props.history.push({
+                //     pathname: '/home',
+                // });
+                
+                this.props.history.push('/home');
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
             });
+
     }
 
     render(){
@@ -110,6 +114,7 @@ class PopUp extends React.Component{
     }
 }
 
+const PopUp = withRouter(PopUpH);
 function Example() {
     const [show, setShow] = useState(false);
   
@@ -157,6 +162,15 @@ class LandingPage extends React.Component{
         this.signUp = this.signUp.bind();
         this.signOut = this.signOut.bind();
         this.togglePopup= this.togglePopup.bind(this);
+        this.switchPage = this.switchPage.bind(this);
+    }
+
+    switchPage(user) {
+        console.log("CMON");
+        this.history.props.push({
+            pathname: '/home',
+            state: user
+        })
     }
 
     togglePopup() {
@@ -238,7 +252,7 @@ class LandingPage extends React.Component{
                     <PopUp
                         closePopup={this.togglePopup.bind(this)}
                         pushHandler={this.pushToHomePage}
-                        historyProp={this.props.history}
+                        historyProp={this.switchPage}
                     />
                     : null
                 }
@@ -254,30 +268,31 @@ class LandingPage extends React.Component{
     }
 }
 
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log("in onauthstatechange");
-        var uid = user.uid;
-        console.log(uid);
-        // var postBody = {
-        //     uuid: uid,
-        //     username: globalUsername,
-        //     syntax: {}
-        // }
-        // fetch("http://localhost:8000/users", {
-        //     method: 'POST',
-        //     body: JSON.stringify(postBody), // string or object
-        //     headers: {
-        //     'Content-Type': 'application/json'
-        //     }
-        // });
-        // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (user) {
+//         // User is signed in, see docs for a list of available properties
+//         // https://firebase.google.com/docs/reference/js/firebase.User
+//         console.log("in onauthstatechange");
+//         var uid = user.uid;
+//         console.log(uid);
+//         // var postBody = {
+//         //     uuid: uid,
+//         //     username: globalUsername,
+//         //     syntax: {}
+//         // }
+//         // fetch("http://localhost:8000/users", {
+//         //     method: 'POST',
+//         //     body: JSON.stringify(postBody), // string or object
+//         //     headers: {
+//         //     'Content-Type': 'application/json'
+//         //     }
+//         // });
+//         // ...
+//     } else {
+//       // User is signed out
+//       // ...
+//     }
+    
+// })
 
 export default LandingPage;
