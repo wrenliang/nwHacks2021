@@ -3,7 +3,11 @@ import {useState, useEffect} from 'react';
 // Component Dependencies
 import SetPage from '../Components/SetPage/setPage';
 import HomePage from '../Components/HomePage/HomePage';
+<<<<<<< HEAD
 import LandingPage from '../Components/LandingPage/LandingPage'
+=======
+// import LandingPage from '../Components/LandingPage/LandingPage'
+>>>>>>> 771899ba101d330885fc890d1c71afab2b1e4ce8
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,6 +17,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import LandingPage from '../Components/LandingPage/LandingPage';
 
 let mockSet = {
   creatorId: "Matthew",

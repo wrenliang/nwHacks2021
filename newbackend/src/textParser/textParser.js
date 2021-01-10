@@ -24,7 +24,7 @@ function checkUnderline(item) {
     }
 }
 
-async function parseDoc(path, formatUsed) {
+async function parseDoc(path, formatUsed, dividerChar) {
     let checkFormatting;
     if (formatUsed == 'bold') {
         console.log('using bold')
@@ -73,6 +73,12 @@ async function parseDoc(path, formatUsed) {
             }
 
             if (parsingTerm == true) {
+                if (term.charAt(term.length - 1) == dividerChar) {
+                    term = term.substring(0, term.length - 1);
+                } else if (def.charAt(0) == dividerChar) {
+                    def = def.substring(1, def.length);
+                }
+
                 console.log(`Adding ${term}: ${def}`)
                 resultsArr.push({
                     term: term,

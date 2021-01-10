@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Navbar, Modal, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 // Component Dependencies
 import NoteSetTile from '../NoteSetTile/NoteSetTile';
@@ -15,46 +16,34 @@ class HomePage extends React.Component {
         this.state = {
             tabSelected: 0,
             showModal: true,
-            noteSets: [
-                {
-                    title: "Title1",
-                    numTerms: 30,
-                    setCreator: "wren.liang@gmail.com"
-                },
-                {
-                    title: "Title2",
-                    numTerms: 10,
-                    setCreator: "wren.liang@gmail.com"
-                },
-                {
-                    title: "Title3",
-                    numTerms: 50,
-                    setCreator: "wren.liang@gmail.com"
-                },
-                {
-                    title: "Title3",
-                    numTerms: 50,
-                    setCreator: "wren.liang@gmail.com"
-                },
-                {
-                    title: "Title3",
-                    numTerms: 50,
-                    setCreator: "wren.liang@gmail.com"
-                }
-            ]
+            creatorId: `1234`,
+            sets: []
         }
+    }
 
+    componentDidMount() {
+        this.getUserSets();
+    }
+
+    clickedOnASet = (index) => {
+        console.log(`clicked ${index}`);
+        this.props.history.push({
+            pathname: '/set',
+            data: this.state.sets[index]
+        });
     }
 
     listOfSets = () => {
         if (this.state.tabSelected === 0) {
-            const list = this.state.noteSets.map((set, index) => {
+            const list = this.state.sets.map((set, index) => {
                 return (
                     <NoteSetTile
                         key={index}
-                        setTitle={set.title}
-                        setNumTerms={set.numTerms}
-                        setCreator={set.setCreator}>
+                        setTitle={set.set.title}
+                        setNumTerms={set.setSize}
+                        setCreator={set.set.creatorId}
+                        clickHandler={() => this.clickedOnASet(index)}
+                        >
                     </NoteSetTile>
                 );
             });
@@ -86,10 +75,49 @@ class HomePage extends React.Component {
         });
     }
 
-    buildAPIRequest = () => {
+    getUserSets = async () => {
+        const url = `http://localhost:8000/sets?creatorId=${this.state.creatorId}`;
+
+        const res = await axios.get(url);
+
+        let sets = [];
+
+        for (var set of res.data.sets) {
+            sets.push({
+                set: set,
+                setSize: set.cards.length
+            });
+        }
+
+        this.setState({
+            sets: sets
+        });
+
         console.log(this.state);
     }
 
+    postCreatedSet = async () => {
+        const url = `http://localhost:8000/sets`;
+
+        const body = {
+            creatorId: this.state.creatorId,
+            title: this.state.newSetTitle,
+            cards: this.state.newSetCards
+        }
+
+        const res = await axios.post(url, body);
+
+        console.log(res);
+    }
+
+    createNewCardsClicked = async () => {
+        await this.postCreatedSet();
+
+        this.toggleModal();
+
+        await this.getUserSets();
+        this.forceUpdate();
+    }
 
 
     render() {
@@ -129,7 +157,7 @@ class HomePage extends React.Component {
                         <Button variant="secondary" onClick={this.toggleModal}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={this.buildAPIRequest}>
+                        <Button variant="primary" onClick={this.createNewCardsClicked}>
                             Create new cards
                         </Button>
                     </Modal.Footer>

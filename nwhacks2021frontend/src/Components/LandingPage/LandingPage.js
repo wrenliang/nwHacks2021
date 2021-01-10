@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 import "./LandingPage.css"
 import Landing_Page_Graphic from "./Landing_Page_Graphic.svg"
 var firebase = require("firebase/app").default;
@@ -18,6 +20,8 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+var username;
 
 class PopUp extends React.Component{
     constructor(props){
@@ -47,6 +51,8 @@ class PopUp extends React.Component{
         console.log(username);
         console.log(email);
         console.log(password);
+
+        username = this.username;
         
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
@@ -82,10 +88,45 @@ class PopUp extends React.Component{
     }
 }
 
+function Example() {
+    const [show, setShow] = useState(false);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Launch static backdrop modal
+        </Button>
+  
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            I will not close if you click outside me. Don't even try to press
+            escape key.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary">Understood</Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
 class LandingPage extends React.Component{
     constructor(props){
         super(props);
-
         this.state = {
             showPopup: false
         };
@@ -169,6 +210,12 @@ class LandingPage extends React.Component{
                     />
                     : null
                 }
+
+                {/* <Button variant="primary" onClick={handleShow}>
+                    Launch static backdrop modal
+                </Button> */}
+
+                
             </div>
             
         )
@@ -177,12 +224,24 @@ class LandingPage extends React.Component{
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      console.log("in onauthstatechange");
-      var uid = user.uid;
-      console.log(uid);
-      // ...
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log("in onauthstatechange");
+        var uid = user.uid;
+        console.log(uid);
+        var postBody = {
+            uuid: uid,
+            username: username,
+            syntax: {}
+        }
+        fetch("http://localhost:3000/", {
+            method: 'POST',
+            body: postBody, // string or object
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        });
+        // ...
     } else {
       // User is signed out
       // ...
