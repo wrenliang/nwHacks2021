@@ -13,6 +13,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import LandingPage from '../Components/LandingPage/LandingPage';
 
 let mockSet = {
   creatorId: "Matthew",
@@ -42,10 +43,10 @@ function App() {
   return (
     <Router>
       <div>
-          <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
-          <Route path="/home" render={(props) => <HomePage {...props}/>}/>
+          {/* <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
+          <Route path="/home" render={(props) => <HomePage {...props}/>}/> */}
           {/* <Route path="/" render={(props) => <LandingPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/> */}
-
+          <LandingPage/>
       </div>
     </Router>
   );
