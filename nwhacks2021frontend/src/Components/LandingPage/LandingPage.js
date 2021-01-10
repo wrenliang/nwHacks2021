@@ -76,10 +76,8 @@ class PopUp extends React.Component{
                 });
                 // Signed in 
                 // ...
-                this.props.routerProps.push({
-                    pathname: '/home',
-                    state: user
-                });
+
+                this.props.pushHandler(user);
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -205,6 +203,14 @@ class LandingPage extends React.Component{
         //   });
     }
 
+    pushToHomePage = (user) => {
+        console.log('calling this');
+        this.props.history.push({
+            pathname: '/home',
+            state: user
+        });
+    }
+
     render(){
         return(
             <div class="pageContainer">
@@ -227,7 +233,7 @@ class LandingPage extends React.Component{
                 {this.state.showPopup ? 
                     <PopUp
                         closePopup={this.togglePopup.bind(this)}
-                        routerProps={this.props.history}
+                        pushHandler={this.pushToHomePage}
                     />
                     : null
                 }
