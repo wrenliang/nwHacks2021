@@ -1,5 +1,6 @@
 // Component Dependencies
 import SetPage from '../Components/SetPage/setPage';
+import LandingPage from '../Components/LandingPage/LandingPage'
 
 import {useState, useEffect} from 'react';
 // CSS
@@ -40,6 +41,7 @@ function App() {
     <Router>
       <div>
           <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
+          <Route path="/" render={(props) => <LandingPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
 
       </div>
     </Router>
