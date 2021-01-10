@@ -6,6 +6,9 @@ import {  } from 'react-bootstrap';
 // CSS
 import './NoteSetTile.css';
 
+// Icons
+import ProfileIcon from './ProfileIcon.svg';
+
 class NoteSetTile extends React.Component {
 
     render() {
@@ -17,7 +20,7 @@ class NoteSetTile extends React.Component {
                         <p className="NoteSetTileTerms">{`${this.props.setNumTerms} terms`}</p>
                     </div>
                     
-                    <p className="NoteSetTileCreator">{`${this.props.setCreator}`}</p>
+                    <p className="NoteSetTileCreator"> <img src={ProfileIcon} width={26} height={26} className="d-inline-block align-top"></img>{` ${this.props.setCreator}`}</p>
                 </div>
             </div>
         )
