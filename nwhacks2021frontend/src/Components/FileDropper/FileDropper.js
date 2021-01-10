@@ -35,7 +35,7 @@ class FileDropper extends React.Component {
                 <input type="file" name="file" onChange={this.fileDidChangeHandler}/>
                 <Button onClick={() => this.uploadButtonClicked}>Upload</Button>
             </div>
-        )
+        );
     }
 
 }
