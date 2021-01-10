@@ -95,7 +95,7 @@ class PopUpH extends React.Component{
 	                    dividerChar: dividerProperty
                     }
                 }
-                fetch("http://localhost:8000/users", {
+                fetch("http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:6464/users", {
                     method: 'POST',
                     body: JSON.stringify(postBody), // string or object
                     headers: {
