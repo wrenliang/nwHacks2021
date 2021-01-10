@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const card = require('../modules/card');
+const card = require('../components/card');
 
 
 router.get('/', function(req, res, next) {

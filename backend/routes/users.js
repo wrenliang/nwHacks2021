@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const user = require('../modules/user');
+const user = require('../components/user');
 
 
 router.get('/', function(req, res, next) {
