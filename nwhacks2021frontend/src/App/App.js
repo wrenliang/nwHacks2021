@@ -14,7 +14,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import LandingPage from '../Components/LandingPage/LandingPage';
 
 let mockSet = {
   creatorId: "Matthew",
