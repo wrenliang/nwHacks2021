@@ -10,7 +10,7 @@ class NoteSetTile extends React.Component {
 
     render() {
         return (
-            <div className="NoteSetTile">
+            <div className="NoteSetTile" onClick={this.props.clickHandler}>
                 <div className="NoteSetTileInner">
                     <div className="NoteSetTileTop">
                         <h1 className="NoteSetTileTitle">{`${this.props.setTitle}`}</h1>
