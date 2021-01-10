@@ -9,6 +9,11 @@ import FileDropper from '../FileDropper/FileDropper';
 // CSS
 import './HomePage.css';
 
+// Icons
+import HomeIcon from './HomeIcon.svg';
+import FolderIcon from './FolderIcon.svg';
+import SharedWithMeIcon from './SharedWithMeIcon.svg';
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -115,10 +120,10 @@ class HomePage extends React.Component {
     createNewCardsClicked = async () => {
         await this.postCreatedSet();
 
-        this.toggleModal();
-
         await this.getUserSets();
         this.forceUpdate();
+
+        this.toggleModal();
     }
 
 
@@ -126,14 +131,14 @@ class HomePage extends React.Component {
         return (
             <div className="HomePage">
                 <Navbar fixed="top" variant="primary" className="HomeNavBar">
-                    <Navbar.Brand> <strong>Wireframe</strong></Navbar.Brand>
+                    <Navbar.Brand style={{color: "white"}}> <strong>CueTips</strong></Navbar.Brand>
                 </Navbar>
                 <div className="Sidebar">
                     <div className="SidebarOptions">
-                        <Button onClick={this.toggleModal}> + Upload Notes </Button>
-                        <h5>Home</h5>
-                        <h5>Folders</h5>
-                        <h5>Shared with me</h5>
+                        <Button onClick={this.toggleModal} style={{width: "90%", backgroundColor: "#5C9CF5"}}> + Upload Notes </Button>
+                        <h5 className="SidebarOptionText"> <img src={HomeIcon} width={26} height={26} className="d-inline-block align-top"></img> Home</h5>
+                        <h5 className="SidebarOptionText"> <img src={FolderIcon} width={26} height={26} className="d-inline-block align-top"></img> Folders</h5>
+                        <h5 className="SidebarOptionText"> <img src={SharedWithMeIcon} width={26} height={26} className="d-inline-block align-top"></img> Shared with me</h5>
                     </div>
                 </div>
                 <div className="MainScreen">
