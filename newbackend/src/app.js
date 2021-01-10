@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 
+const parser = require('./textParser/textParser');
+
 // Objects
 const PORT = process.env.PORT_NUM || 8000;
 
@@ -18,25 +20,33 @@ server = app.listen(PORT, () => {
 
 // --- testing
 var storage = multer.diskStorage({
-    destination: './files',
+    destination: (req, file, cb) => {
+        cb(null, "uploads/")
+    },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + '-' +file.originalname )
+        cb(null, Date.now() + '-' +file.originalname )
     }
   });
   
-var upload = multer({ storage: storage }).single('test');
+var upload = multer({ storage: storage });
 
 
-app.post('/upload', (req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
     console.log('got upload request');
-    upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-        return res.status(500).json(err)
-    } else if (err) {
-        return res.status(500).json(err)
+    const file = req.file
+    if (!file) {
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
     }
-    return res.status(200).send(req.file)
-    });
+
+    console.log(file);
+    
+    const array = await parser(file.path, 'bold');
+
+    console.log(array);
+
+    res.send(array);
 });
 
 app.get('/test', (req, res) => {
