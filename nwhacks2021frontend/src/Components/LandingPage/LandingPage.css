@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root{
+    height: 100%;
+    --popup-margin: 40px;
+    --popup-input-height: 40px;
+    --popup-input-width: 250px;
+}
+
+.NavBar{
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 99px;
+    background: #0A7FEB 0% 0% no-repeat padding-box;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navTitle{
+    margin-left: 10%;
+    font: normal normal 600 20px/36px Source Sans Pro;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.buttonGroup{
+    margin-left: auto;
+    margin-right: 10%;
+}
+
+.loginButton{
+    background-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    outline:none;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+.signUpButton{
+    background: #74CAFF 0% 0% no-repeat padding-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border:none;
+}
+
+.getStartedButton{
+    background: #2A99FB 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    border:none;
+}
+
+.pageContainer{
+    height: 100%;
+    padding: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    flex-grow: 1;
+    margin: 50px;
+}
+
+.titleText{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #707070;
+    font-size: 30px;
+    margin-top: 20%;
+    margin-bottom: 20%;
+    text-align: left;
+}
+
+.subContainter{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.landingPageImage{
+    width: 500px;
+    
+}
+
+.popUp{
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.greyBackground{
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formLabel{
+    margin-top: 20px;
+    margin-right: var(--popup-margin);
+    margin-left: var(--popup-margin);
+    align-self: flex-start;
+    color: #4B4B4B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.popUpInput{
+    margin-top: 5px;
+    width: var(--popup-input-width);
+    height: var(--popup-input-height);
+    margin-right: var(--popup-margin);
+    margin-left: var(--popup-margin);
+    padding: 0;
+    align-self: center;
+}
+
+.closePopUp{
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.popUpSignUp{
+    background: #2A99FB 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+    border: none;
+    outline:none;
+    width: var(--popup-input-width);
+    height: var(--popup-input-height);
+    margin-right: var(--popup-margin);
+    margin-left: var(--popup-margin);
+    margin-top: 30px;
+    margin-bottom: var(--popup-margin);
+    padding: 0;
+    align-self: center;
+}
