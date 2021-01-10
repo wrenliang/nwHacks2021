@@ -4,10 +4,6 @@ import {useState, useEffect} from 'react';
 import SetPage from '../Components/SetPage/setPage';
 import HomePage from '../Components/HomePage/HomePage';
 import LandingPage from '../Components/LandingPage/LandingPage'
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e8dcf5c880c7ade09a1c155a9c63c6a2152b9e6
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';

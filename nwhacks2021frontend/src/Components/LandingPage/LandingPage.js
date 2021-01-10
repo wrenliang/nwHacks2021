@@ -63,7 +63,7 @@ class PopUp extends React.Component{
                 // ...
                 this.props.routerProps.push({
                     pathname: '/home',
-                    firebaseUser: user
+                    state: user
                 });
             })
             .catch((error) => {

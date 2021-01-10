@@ -16,7 +16,7 @@ class HomePage extends React.Component {
         this.state = {
             tabSelected: 0,
             showModal: true,
-            firebaseUser: this.props.firebaseUser,
+            firebaseUser: this.props.location.state,
             sets: []
         }
     }
@@ -30,7 +30,7 @@ class HomePage extends React.Component {
         console.log(`clicked ${index}`);
         this.props.history.push({
             pathname: '/set',
-            data: this.state.sets[index]
+            state: this.state.sets[index]
         });
     }
 
