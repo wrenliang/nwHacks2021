@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="755" height="781" viewBox="0 0 755 781">
+  <defs>
+    <filter id="Rectangle_738" x="0" y="146" width="419" height="536" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feFlood flood-opacity="0.275"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_739" x="404" y="0" width="351" height="293" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur-2"/>
+      <feFlood flood-opacity="0.275"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_740" x="404" y="244" width="351" height="293" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur-3"/>
+      <feFlood flood-opacity="0.275"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_741" x="404" y="488" width="351" height="293" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur-4"/>
+      <feFlood flood-opacity="0.275"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_409" data-name="Group 409" transform="translate(-932 -146)">
+    <g transform="matrix(1, 0, 0, 1, 932, 146)" filter="url(#Rectangle_738)">
+      <rect id="Rectangle_738-2" data-name="Rectangle 738" width="329" height="446" rx="15" transform="translate(45 186)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 932, 146)" filter="url(#Rectangle_739)">
+      <rect id="Rectangle_739-2" data-name="Rectangle 739" width="261" height="203" rx="15" transform="translate(449 40)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 932, 146)" filter="url(#Rectangle_740)">
+      <rect id="Rectangle_740-2" data-name="Rectangle 740" width="261" height="203" rx="15" transform="translate(449 284)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 932, 146)" filter="url(#Rectangle_741)">
+      <rect id="Rectangle_741-2" data-name="Rectangle 741" width="261" height="203" rx="15" transform="translate(449 528)" fill="#fff"/>
+    </g>
+    <text id="Notes" transform="translate(1104 400)" fill="#303336" font-size="28" font-family="HelveticaNeue-Medium, Helvetica Neue" font-weight="500"><tspan x="0" y="0">Notes</tspan></text>
+    <rect id="Rectangle_742" data-name="Rectangle 742" width="92" height="23" rx="11.5" transform="translate(1028 455)" fill="#5c9cf5"/>
+    <rect id="Rectangle_748" data-name="Rectangle 748" width="92" height="23" rx="11.5" transform="translate(1466 276)" fill="#5c9cf5"/>
+    <rect id="Rectangle_744" data-name="Rectangle 744" width="130" height="23" rx="11.5" transform="translate(1028 546)" fill="#f5c950"/>
+    <rect id="Rectangle_749" data-name="Rectangle 749" width="130" height="23" rx="11.5" transform="translate(1447 520)" fill="#f5c950"/>
+    <rect id="Rectangle_746" data-name="Rectangle 746" width="60" height="23" rx="11.5" transform="translate(1028 637)" fill="#ef7392"/>
+    <rect id="Rectangle_750" data-name="Rectangle 750" width="60" height="23" rx="11.5" transform="translate(1482 767)" fill="#ef7392"/>
+    <rect id="Rectangle_743" data-name="Rectangle 743" width="227" height="23" rx="11.5" transform="translate(1028 492)" fill="#e3e7ec"/>
+    <rect id="Rectangle_745" data-name="Rectangle 745" width="227" height="23" rx="11.5" transform="translate(1028 583)" fill="#e3e7ec"/>
+    <rect id="Rectangle_747" data-name="Rectangle 747" width="227" height="23" rx="11.5" transform="translate(1028 674)" fill="#e3e7ec"/>
+  </g>
+</svg>
