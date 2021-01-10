@@ -30,6 +30,11 @@ var storage = multer.diskStorage({
   
 var upload = multer({ storage: storage });
 
+var usersRouter = require('./routes/users');
+var setsRouter = require('./routes/sets');
+
+app.use('/users', usersRouter);
+app.use('/sets', setsRouter);
 
 app.post('/upload', upload.single('file'), async (req, res) => {
     console.log('got upload request');
