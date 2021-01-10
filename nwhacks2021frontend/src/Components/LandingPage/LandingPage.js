@@ -95,13 +95,13 @@ class PopUpH extends React.Component{
 	                    dividerChar: dividerProperty
                     }
                 }
-                // fetch("http://localhost:8000/users", {
-                //     method: 'POST',
-                //     body: JSON.stringify(postBody), // string or object
-                //     headers: {
-                //     'Content-Type': 'application/json'
-                //     }
-                // });
+                fetch("http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:6464/users", {
+                    method: 'POST',
+                    body: JSON.stringify(postBody), // string or object
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                });
                 // Signed in 
                 // ...
 
@@ -110,7 +110,7 @@ class PopUpH extends React.Component{
                 // this.props.history.push({
                 //     pathname: '/home',
                 // });
-                
+                this.props.changeUser(user);
                 this.props.history.push('/home');
             })
             .catch((error) => {
@@ -329,6 +329,7 @@ class LandingPage extends React.Component{
                         closePopup={this.togglePopup.bind(this)}
                         pushHandler={this.pushToHomePage}
                         historyProp={this.switchPage}
+                        changeUser={this.props.changeUser}
                     />
                     : null
                 }

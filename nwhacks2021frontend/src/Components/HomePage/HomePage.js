@@ -21,10 +21,11 @@ class HomePage extends React.Component {
         this.state = {
             tabSelected: 0,
             showModal: true,
-            firebaseUser: this.props.location.state,
+            firebaseUser: this.props.user.user,
             sets: [],
-            creatorId: "1234"
+            creatorId: this.props.user.user.uid
         }
+        console.log(this.props.user);
     }
 
     componentDidMount() {
@@ -83,7 +84,7 @@ class HomePage extends React.Component {
     }
 
     getUserSets = async () => {
-        const url = `http://localhost:8000/sets?creatorId=${this.state.creatorId}`;
+        const url = `http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:6464/sets?creatorId=${this.state.creatorId}`;
 
         const res = await axios.get(url);
 
@@ -104,7 +105,7 @@ class HomePage extends React.Component {
     }
 
     postCreatedSet = async () => {
-        const url = `http://localhost:8000/sets`;
+        const url = `http://ec2-34-214-245-195.us-west-2.compute.amazonaws.com:6464/sets`;
 
         const body = {
             creatorId: this.state.creatorId,

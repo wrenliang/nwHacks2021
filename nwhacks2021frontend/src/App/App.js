@@ -33,13 +33,19 @@ let mockSet = {
 
 
 function App() {
+  const [user, setUser] = useState({});
+
+  const changeUser = (newUser) => {
+    setUser(newUser);
+  }
+
   return (
     <Router>
       <div>
         <Switch>
           <Route path="/set" render={(props) => <SetPage {...props} data={mockSet} />}/>
-          <Route path="/home" render={(props) => <HomePage {...props} />}/>
-          <Route path="/" render={(props) => <LandingPage {...props} />}/>
+          <Route path="/home" render={(props) => <HomePage {...props} user={user} />}/>
+          <Route path="/" render={(props) => <LandingPage {...props} changeUser={changeUser} />}/>
         </Switch>
       </div>
     </Router>
