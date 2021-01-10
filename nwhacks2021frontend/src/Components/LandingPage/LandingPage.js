@@ -77,7 +77,11 @@ class PopUp extends React.Component{
                 // Signed in 
                 // ...
 
-                this.props.pushHandler(user);
+                // this.props.pushHandler(user);
+                this.props.historyProp.push({
+                    pathname: '/home',
+                    state: user
+                });
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -234,6 +238,7 @@ class LandingPage extends React.Component{
                     <PopUp
                         closePopup={this.togglePopup.bind(this)}
                         pushHandler={this.pushToHomePage}
+                        historyProp={this.props.history}
                     />
                     : null
                 }

@@ -37,7 +37,7 @@ class IndividualCard extends React.Component {
 
       for (let i = 0; i < d.cards.length; i++) {
          if(d.cards[i].term === this.props.term) {
-            d.cards[i].definition = newText;
+            d.cards[i].def = newText;
          }
       }
 
@@ -68,13 +68,13 @@ console.log(d);
             {this.state.edit && 
             <form>
                <textarea id="text">
-                  {this.props.definition}
+                  {this.props.def}
                </textarea>
             </form> 
             }
 
             {!this.state.edit && 
-            <h1>{this.props.definition}</h1>
+            <h1>{this.props.def}</h1>
             }
 
             <div className="Icons"> 
@@ -105,7 +105,7 @@ class CardList extends React.Component {
             {this.props.data.map(card => {
                return (
 
-                  <IndividualCard definition={card.definition} term={card.term} set={this.props.set}/>
+                  <IndividualCard def={card.def} term={card.term} set={this.props.set}/>
 
                )
             })}
@@ -117,7 +117,9 @@ class CardList extends React.Component {
 class SetPage extends React.Component {
    constructor(props) {
       super(props);
-      this.state = {cards: this.props.location.state.cards, count: 1, cardState: "Term"};
+      this.state = {cards: this.props.location.state.set.cards, count: this.props.location.state.setSize, cardState: "Term"};
+
+      console.log(this.state);
       this.forwardCard = this.forwardCard.bind(this);
       this.backwardCard = this.backwardCard.bind(this);
       this.changeText = this.changeText.bind(this);
@@ -166,7 +168,7 @@ class SetPage extends React.Component {
 
 
                <div className="card" onClick={this.changeText}>
-                  <h1 >{this.state.cardState === "Term" ? this.state.cards[0].term : this.state.cards[0].definition}</h1>
+                  <h1 >{this.state.cardState === "Term" ? this.state.cards[0].term : this.state.cards[0].def}</h1>
                </div>
 
                <div className="cardNav">
@@ -185,7 +187,7 @@ class SetPage extends React.Component {
                   </div>
 
                   <div class="list">
-                     <CardList data={this.props.location.state.cards} set={this.props.location.state}/>
+                     <CardList data={this.props.location.state.set.cards} set={this.props.location.state.set}/>
 
                   </div>
                </div>
