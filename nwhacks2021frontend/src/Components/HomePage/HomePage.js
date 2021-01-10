@@ -23,7 +23,7 @@ class HomePage extends React.Component {
             showModal: false,
             firebaseUser: this.props.location.state,
             sets: [],
-            creatorId: "1234"
+            creatorId: "wrennyboy123"
         }
     }
 

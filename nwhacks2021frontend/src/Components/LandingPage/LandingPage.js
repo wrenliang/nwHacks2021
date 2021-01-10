@@ -32,27 +32,54 @@ class PopUpH extends React.Component{
         this.state = {
             username: "",
             email: "",
-            password: ""
+            password: "",
+            termProperty: "",
+            dividerProperty: "",
+            showSyntaxPopUp: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.submitLogin = this.submitLogin.bind(this);
+        this.showSyntaxPopUp = this.showSyntaxPopUp.bind(this);
+        this.closeSyntaxPopUp = this.closeSyntaxPopUp.bind(this);
+    }
+
+    closeSyntaxPopUp(){
+        this.setState({
+            showSyntaxPopUp: false
+        });
+    }
+
+    showSyntaxPopUp(){
+        this.setState({
+            showSyntaxPopUp: true
+        });
     }
 
     handleChange(event){
-        const {name, value} = event.target;
+        let {name, value} = event.target;
 
         this.setState(() => ({
             [name]: value
         }))
+
+        
+    }
+
+    submitLogin(event){
+        event.preventDefault();
+        this.showSyntaxPopUp();
     }
 
     handleSubmit(event){
         event.preventDefault();
-        var {username, email, password} = this.state;
+        var {username, email, password, termProperty, dividerProperty, temp} = this.state;
         console.log(username);
         console.log(email);
         console.log(password);
+        console.log(termProperty);
+        console.log(dividerProperty);
 
         globalUsername = username;
         
@@ -64,8 +91,8 @@ class PopUpH extends React.Component{
                     uuid: user.user.uid,
                     username: username,
                     syntax: {
-                        termProperty: "bold",
-	                    dividerChar: ":"
+                        termProperty: termProperty,
+	                    dividerChar: dividerProperty
                     }
                 }
                 // fetch("http://localhost:8000/users", {
@@ -89,16 +116,21 @@ class PopUpH extends React.Component{
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                console.log("error code: " + errorCode);
+                console.log("error message:" + errorMessage);
             });
 
     }
+    
+    // adding syntax pop up to the home page
+    // needs handleChange and handleSubmit
 
     render(){
         return(
             <div className="greyBackground">
                 <div className="popUp">
                     <button className="closePopUp" onClick={this.props.closePopup}>close me</button>
-                    <form className="form" onSubmit={this.handleSubmit}>
+                    <form className="form" onSubmit={this.submitLogin}>
                         <label className="formLabel">USERNAME:</label>
                         <input className="popUpInput" type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
                         <label className="formLabel">EMAIL:</label>
@@ -108,6 +140,43 @@ class PopUpH extends React.Component{
                         <input className="popUpSignUp" type="submit" value="Sign up" />
                     </form>
                 </div>
+                <Modal
+                    show={this.state.showSyntaxPopUp}
+                    onHide={this.closeSyntaxPopUp}
+                    backdrop="static"
+                    keyboard={false}
+                    centered
+                    size="lg"
+                >
+                    
+                    <Modal.Header closeButton>
+                        <div>
+                            <Modal.Title>Customize how your notes will be recognized</Modal.Title>
+                            <p>You can change this later</p>
+                        </div>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form className="form">
+                            <label className="formLabel">Term Property</label>
+                            <select name="termProperty" id="termProperty" onChange={this.handleChange}>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="bold">Bold</option>
+                                <option value="italic">Italic</option>
+                                <option value="underline">underline</option>
+                            </select>
+                            <label className="formLabel">Divider Property</label>
+                            <select name="dividerProperty" id="dividerProperty" onChange={this.handleChange}>
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value=":">:</option>
+                                <option value="-">-</option>
+                                <option value="/">/</option>
+                            </select>
+                        </form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.handleSubmit}>Create Syntax</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
             
         );
@@ -233,7 +302,7 @@ class LandingPage extends React.Component{
         return(
             <div class="pageContainer">
                 <div className="NavBar">
-                    <h1 className="navTitle">WIREFRAME</h1>
+                    <h1 className="navTitle">QueTips</h1>
                     <div className="buttonGroup">
                         <button className="loginButton">Log in</button>
                         <button className="signUpButton" onClick={this.togglePopup}>Sign up</button>
