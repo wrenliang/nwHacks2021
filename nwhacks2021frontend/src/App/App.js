@@ -1,27 +1,48 @@
 // Component Dependencies
-import FileDropper from '../Components/FileDropper/FileDropper';
+import SetPage from '../Components/SetPage/setPage';
 
-import { Navbar, Button } from 'react-bootstrap';
-
+import {useState, useEffect} from 'react';
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+let mockSet = {
+  creatorId: "Matthew",
+  title: "nwHacks2021",
+  collaboratorId: [],
+  cards: [
+    {
+      term: "YEET",
+      definition: "YAW" 
+    },
+    {
+      term: "YOTE",
+      definition: "YOOO"
+    }
+  ],
+  listOfContributingDocs: "None"
+}
+
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar fixed="top" variant="light" className="Navbar">
-            <Navbar.Brand> <strong>Cue-Tips</strong> </Navbar.Brand>
-            <Navbar.Collapse className="justify-content-end">
-              <Button>Hello</Button>
-            </Navbar.Collapse>
-      </Navbar>
+  const[userInfo, setUserInfo] = useState({});
 
-      <div className="LandingPage">
-        <FileDropper />
+  const updateUserInfo = (data) => {
+    setUserInfo(data);
+  }
+
+  return (
+    <Router>
+      <div>
+          <Route path="/set" render={(props) => <SetPage {...props} data={mockSet}  updateUser={updateUserInfo}/>}/>
+
       </div>
-      
-    </div>
+    </Router>
   );
 }
 
