@@ -1,3 +1,21 @@
 .FileDropper {
-    background-color: blue;
+    background-color: lightblue;
+    width: 800px;
+    height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.FileInput {
+    width: 50%;
+}
+
+
+.CreateButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }

@@ -38,13 +38,15 @@ class FileDropper extends React.Component {
     render() {
         return (
             <div className="FileDropper">
-                <h1>FileDropper</h1>
-                <input type="file" name="file" onChange={this.fileDidChangeHandler}/>
-                <Button onClick={() => this.uploadButtonClicked()}>Upload</Button>
+                <input type="file" name="file" onChange={this.fileDidChangeHandler} className="FileInput"/>
+                <div className="CreateButtons">
+                    <Button onClick={() => this.uploadButtonClicked()} variant="primary"> Create New Notes </Button>
+                    <Button variant="light"> Add to Existing </Button>
+                </div>
+                
             </div>
         );
     }
-
 }
 
 export default FileDropper;
