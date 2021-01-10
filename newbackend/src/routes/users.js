@@ -3,21 +3,21 @@ var router = express.Router();
 const db = require('../firestore/firebase');
 
 
-router.get('/', function(req, res, next) {
-  const param = req;
+router.get('/', async function(req, res, next) {
+  console.log('GET /users');
+  const param = req.query;
   db.collection('users').where('uuid', '=', param.uuid).get()
   .then(docs => {
-    docs.forEach(user => res.send({msg: 'Success', user: user}));
+    docs.forEach(user => res.send({msg: 'Success', user: user._fieldsProto}));
   })
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
+  console.log('POST /users');
   const param = req.body;
-  db.collection('users').doc()
-  .then(doc => {
-    doc.set(param);
-    res.send({msg: 'Success'})
-  })
+  const docRef = db.collection('users').doc();
+  docRef.set(param);
+  res.send({msg: 'Success'});
 })
 
 module.exports = router;
